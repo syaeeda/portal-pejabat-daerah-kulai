@@ -1,15 +1,12 @@
-# Portal Rasmi Pejabat Daerah Kulai
+# Portal Pejabat Daerah Kulai
 
-Sistem Portal AI Chatbot untuk Pejabat Daerah Kulai yang menyediakan layanan pelanggan otomatis, manajemen aduan, dan analytics.
+## 🎯 Main Feature
 
-## 🎯 Fitur Utama
-
-- **💬 AI Chatbot** - Chatbot yang didukung AI (Gemini API) untuk menjawab pertanyaan umum
-- **📝 Manajemen Aduan** - Pengguna dapat mengajukan, melacak, dan mengelola aduan
-- **❓ FAQ & Pengetahuan** - Basis pengetahuan yang dapat dicari untuk informasi umum
-- **🔐 Autentikasi Pengguna** - Sistem login dan registrasi yang aman
-- **📊 Dashboard Admin** - Analytics dan reporting untuk administrator
-- **📱 Responsif** - Kompatibel dengan desktop, tablet, dan mobile
+- **💬 AI Chatbot** - AI-powered chatbot (Gemini API) to answer common questions
+- **📝 Complaint Management** - Users can submit, track, and manage complaints
+- **❓ FAQ & Knowledge Base** - Searchable database for general information and references
+- **🔐 Secure Authentication** - Safe and secure account registration and login system
+- **📊 Admin Dashboard** - Analytics and reporting for administrators
 
 ## 🛠️ Tech Stack
 
@@ -17,25 +14,24 @@ Sistem Portal AI Chatbot untuk Pejabat Daerah Kulai yang menyediakan layanan pel
 - **React.js** - UI library
 - **React Router** - Client-side routing
 - **Tailwind CSS** - Styling framework
-- **Axios** - HTTP client
 
-### Backend (Diimplementasikan Nanti)
+### Backend (To be implemented)
 - **Laravel** - PHP framework
 - **MySQL** - Database
 - **Gemini API** - AI integration
 
 ## 📋 Prerequisites
 
-- Node.js (v14 atau lebih tinggi)
-- npm atau yarn
+- Node.js (v14 or higher)
+- npm or yarn
 - Git
 
 ## 🚀 Setup & Installation
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/yourusername/Portal-Rasmi-Pejabat-Kulai.git
-cd Portal-Rasmi-Pejabat-Kulai
+git clone https://github.com/yourusername/portal-pejabat-daerah-kulai.git
+cd portal-pejabat-daerah-kulai
 ```
 
 ### 2. Install Dependencies
@@ -48,7 +44,7 @@ npm install
 cp .env.example .env.local
 ```
 
-Edit `.env.local` dan sesuaikan dengan konfigurasi backend Anda:
+Edit `.env.local` and update it with your backend configuration:
 ```
 REACT_APP_API_URL=http://localhost:8000/api
 ```
@@ -58,12 +54,12 @@ REACT_APP_API_URL=http://localhost:8000/api
 npm start
 ```
 
-Server akan berjalan di `http://localhost:3000`
+Server will be run at `http://localhost:3000`
 
 ## 📁 Struktur Folder
 
 ```
-Portal-Rasmi-Pejabat-Kulai/
+portal-pejabat-daerah-kulai/
 ├── public/
 ├── src/
 │   ├── components/
@@ -91,49 +87,49 @@ Portal-Rasmi-Pejabat-Kulai/
 └── tailwind.config.js
 ```
 
-## 📝 Penggunaan
+## 📝 Usage
 
-### Untuk Pengguna Umum
-1. **Daftar & Login** - Buat akun baru dengan email
-2. **Gunakan Chatbot** - Tanya pertanyaan kepada AI chatbot
-3. **Ajukan Aduan** - Laporkan masalah melalui form
-4. **Lacak Status** - Pantau progress aduan Anda
-5. **Baca FAQ** - Cari jawaban di knowledge base
+### For General Users
+1. **Register & Login** - Create a new account using your email
+2. **Use the Chatbot** - Ask questions to the AI chatbot
+3. **Submit a Complaint** - Report an issue through the form
+4. **Track Status** - Monitor the progress of your complaint
+5. **Read the FAQs** - Find answers in the knowledge base
 
-### Untuk Administrator
-1. **Login** - Masuk dengan akun admin
-2. **Dashboard** - Lihat statistik dan analytics
-3. **Manajemen Aduan** - Kelola dan balas aduan
-4. **Manajemen FAQ** - Tambah/edit/hapus FAQ entries
-5. **Generate Reports** - Export data untuk analisis
+### For Administrators
+1. **Login** - Sign in with an admin account
+2. **Dashboard** - View statistics and analytics
+3. **Manage Complaints** - Review, manage, and respond to user complaints
+4. **Manage FAQs** - Add, edit, or delete FAQ entries
+5. **Generate Reports** - Export data for analysis
 
 ## 🔗 API Endpoints
 
-Lihat `src/services/api.js` untuk daftar lengkap endpoint API.
+Check `src/services/api.js` for the complete list of API endpoints.
 
 ### Auth
-- `POST /api/auth/register` - Registrasi pengguna baru
-- `POST /api/auth/login` - Login pengguna
-- `POST /api/auth/logout` - Logout
-- `GET /api/auth/profile` - Dapatkan profil pengguna
+- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/login` - User login
+- `POST /api/auth/logout` - User logout
+- `GET /api/auth/profile` - Get user profile
 
 ### Chatbot
-- `POST /api/chatbot/message` - Kirim pesan ke chatbot
-- `GET /api/chatbot/history` - Dapatkan riwayat chat
+- `POST /api/chatbot/message` - Send a message to the chatbot
+- `GET /api/chatbot/history` - Get chat history
 
 ### Complaints
-- `GET /api/complaints/my-complaints` - Dapatkan aduan pengguna
-- `POST /api/complaints` - Buat aduan baru
-- `GET /api/complaints/:id` - Dapatkan detail aduan
-- `GET /api/complaints` - Dapatkan semua aduan (admin)
-- `PUT /api/complaints/:id/status` - Update status aduan (admin)
+- `GET /api/complaints/my-complaints` - Get user's complaints
+- `POST /api/complaints` - Submit a new complaint
+- `GET /api/complaints/:id` - Get complaint details
+- `GET /api/complaints` - Get all complaints (admin)
+- `PUT /api/complaints/:id/status` - Update complaint status (admin)
 
 ### FAQ
-- `GET /api/faqs` - Dapatkan semua FAQ
-- `GET /api/faqs/search` - Cari FAQ
-- `POST /api/faqs` - Buat FAQ baru (admin)
-- `PUT /api/faqs/:id` - Update FAQ (admin)
-- `DELETE /api/faqs/:id` - Hapus FAQ (admin)
+- `GET /api/faqs` - Get all FAQs
+- `GET /api/faqs/search` - Search FAQs
+- `POST /api/faqs` - Create a new FAQ (admin)
+- `PUT /api/faqs/:id` - Update an FAQ (admin)
+- `DELETE /api/faqs/:id` - Delete an FAQ (admin)
 
 ### Analytics
 - `GET /api/analytics/chat` - Chat analytics (admin)
@@ -142,12 +138,12 @@ Lihat `src/services/api.js` untuk daftar lengkap endpoint API.
 
 ## 🧪 Development
 
-### Menjalankan Development Server
+### Starting the Development Server
 ```bash
 npm start
 ```
 
-### Build untuk Production
+### Build for Production
 ```bash
 npm run build
 ```
@@ -159,67 +155,43 @@ npm run lint
 
 ## 📤 Deployment
 
-### Deploy ke GitHub Pages
+### Deploy to GitHub Pages
 ```bash
 npm install --save-dev gh-pages
 ```
 
-Edit `package.json` dan tambahkan:
+Edit `package.json` and add:
 ```json
-"homepage": "https://yourusername.github.io/Portal-Rasmi-Pejabat-Kulai",
+"homepage": "https://yourusername.github.io/portal-pejabat-daerah-kulai",
 "scripts": {
   "predeploy": "npm run build",
   "deploy": "gh-pages -d build"
 }
 ```
 
-Kemudian jalankan:
+Then, run:
 ```bash
 npm run deploy
 ```
 
-### Deploy ke Vercel
+### Deploy to Vercel
 ```bash
 npm i -g vercel
 vercel
 ```
 
-### Deploy ke Netlify
-Hubungkan GitHub repository Anda ke Netlify dan setup otomatis deployment.
+### Deploy to Netlify
+Connect your GitHub repository to Netlify and set up automatic deployment.
 
 ## 🐛 Bug Report
 
-Jika Anda menemukan bug, silakan buat issue di GitHub dengan detail:
-- Deskripsi bug
-- Langkah untuk reproduce
+If you encounter a bug, please open an issue on GitHub with the following details:
+- Bug description
+- Steps to reproduce
 - Expected behavior
 - Actual behavior
-- Screenshot (jika applicable)
+- Screenshot (if applicable)
 
-## 📄 Lisensi
+## 📄 License
 
-Proyek ini dilisensikan di bawah MIT License - lihat file `LICENSE` untuk detail.
-
-## 👥 Tim Pengembang
-
-- **Pat Yoon Xin** (A24CS0292) - AI Chatbot
-- **Syaeeda Khanum Binti Rosli** (A24CS0299) - Complaint Management
-- **Irdina Sofia Binti Rohaidi** (A24CS0253) - Analytics & Reporting
-- **Atiqah Qaisara Binti Hijat** (A24CS0228) - User Authentication
-- **Raja Nur Allea Dewi Mahsuri** (A24CS0294) - FAQ & Knowledge Base
-
-## 📧 Kontak
-
-Untuk pertanyaan atau masukan, hubungi:
-- Email: support@pejabatkulai.gov.my
-- Telepon: +60-7-1234-5678
-
-## 🎓 Institusi
-
-SCSE2243: APPLICATION DEVELOPMENT PROJECT 1
-Semester 02, 2025/2026
-Faculty of Computing, UTM Johor Bahru
-
----
-
-**Dibuat dengan ❤️ oleh Tim Beyond Level**
+This project is licensed under the MIT License - see the `LICENSE` file for the details.
