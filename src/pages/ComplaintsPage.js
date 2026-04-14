@@ -6,6 +6,7 @@ function ComplaintsPage() {
   const [showForm, setShowForm] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [selectedComplaint, setSelectedComplaint] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
     category: 'Infrastruktur',
@@ -90,6 +91,123 @@ function ComplaintsPage() {
         {errorMessage && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 fade-in">
             {errorMessage}
+          </div>
+        )}
+
+        {/* Complaint Status Detail Modal */}
+        {selectedComplaint && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-gray-900">Complaint Status</h2>
+                <button
+                  onClick={() => setSelectedComplaint(null)}
+                  className="text-gray-500 hover:text-gray-700 text-2xl"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="p-6 space-y-4">
+                {/* Complaint Title and Status */}
+                <div className="border-b pb-4">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{selectedComplaint.title}</h3>
+                  <div className="flex items-center gap-3">
+                    <span className={`badge ${getStatusBadge(selectedComplaint.status).badge}`}>
+                      {getStatusBadge(selectedComplaint.status).label}
+                    </span>
+                    <span className="text-sm text-gray-500">Reference #: {selectedComplaint.id}</span>
+                  </div>
+                </div>
+
+                {/* Complaint Details */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <p className="text-sm text-gray-600">Category</p>
+                    <p className="text-lg font-semibold text-gray-900">{selectedComplaint.category}</p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <p className="text-sm text-gray-600">Location</p>
+                    <p className="text-lg font-semibold text-gray-900">{selectedComplaint.location}</p>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <div>
+                  <p className="text-sm text-gray-600 mb-2 font-semibold">Description</p>
+                  <p className="text-gray-900 bg-blue-50 p-3 rounded">{selectedComplaint.description}</p>
+                </div>
+
+                {/* Attachment */}
+                {selectedComplaint.attachment && (
+                  <div>
+                    <p className="text-sm text-gray-600 mb-2 font-semibold">📎 Attachment</p>
+                    <a
+                      href={selectedComplaint.attachment}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 font-medium"
+                    >
+                      View Attachment
+                    </a>
+                  </div>
+                )}
+
+                {/* Timeline */}
+                <div>
+                  <p className="text-sm text-gray-600 mb-3 font-semibold">📋 Status Timeline</p>
+                  <div className="space-y-3">
+                    <div className="flex gap-4">
+                      <div className="flex flex-col items-center">
+                        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">📝</div>
+                      </div>
+                      <div className="text-sm">
+                        <p className="font-semibold text-gray-900">Submitted</p>
+                        <p className="text-gray-600">{new Date(selectedComplaint.created_at).toLocaleString()}</p>
+                      </div>
+                    </div>
+                    
+                    {selectedComplaint.status !== 'pending' && (
+                      <div className="flex gap-4">
+                        <div className="flex flex-col items-center">
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center ${selectedComplaint.status === 'in_progress' ? 'bg-yellow-100 text-yellow-600' : 'bg-green-100 text-green-600'}`}>
+                            {selectedComplaint.status === 'in_progress' ? '⚙️' : '✅'}
+                          </div>
+                        </div>
+                        <div className="text-sm">
+                          <p className="font-semibold text-gray-900">{selectedComplaint.status === 'in_progress' ? 'In Progress' : 'Resolved'}</p>
+                          <p className="text-gray-600">{new Date(selectedComplaint.updated_at).toLocaleString()}</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Staff Handler - Under Timeline */}
+                  {selectedComplaint.handler && (
+                    <div className="mt-4 bg-purple-50 p-4 rounded-lg">
+                      <p className="text-sm text-gray-600 mb-2 font-semibold">👤 Staff Handler</p>
+                      <p className="text-lg font-semibold text-gray-900">{selectedComplaint.handler}</p>
+                    </div>
+                  )}
+
+                  {/* Conclusion/Comment - Under Timeline */}
+                  {selectedComplaint.conclusion && (
+                    <div className="mt-4 bg-green-50 p-4 rounded-lg">
+                      <p className="text-sm text-gray-600 mb-2 font-semibold">💬 Conclusion</p>
+                      <p className="text-gray-900">{selectedComplaint.conclusion}</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Close Button */}
+                <button
+                  onClick={() => setSelectedComplaint(null)}
+                  className="w-full btn btn-secondary mt-4"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
           </div>
         )}
 
@@ -215,7 +333,11 @@ function ComplaintsPage() {
           ) : (
             <div className="space-y-3">
               {complaints.map((complaint) => (
-                <div key={complaint.id} className="card-hover border border-gray-200">
+                <div 
+                  key={complaint.id} 
+                  className="card-hover border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+                  onClick={() => setSelectedComplaint(complaint)}
+                >
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-gray-900">{complaint.title}</h3>
@@ -228,7 +350,7 @@ function ComplaintsPage() {
 
                   <div className="flex flex-wrap gap-4 text-sm text-gray-600 pt-3 border-t border-gray-100">
                     <span>🏷️ {complaint.category}</span>
-                    <span>� {complaint.location}</span>
+                    <span>📍 {complaint.location}</span>
                     <span>📅 {new Date(complaint.created_at).toLocaleDateString('en-US')}</span>
                     <span>🔔 ID: {complaint.id}</span>
                   </div>
@@ -239,6 +361,7 @@ function ComplaintsPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         📎 View Attachment
                       </a>

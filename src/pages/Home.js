@@ -8,7 +8,7 @@ function Home() {
       <section className="hero">
         <div className="container-custom text-center fade-in">
           <h1 className="hero-title text-gradient">
-            Official Portal of Kulai District Office
+            Portal Rasmi Pejabat Daerah Kulai
           </h1>
           <p className="hero-subtitle text-gray-600 max-w-2xl mx-auto">
             Modern, responsive and easily accessible district government service

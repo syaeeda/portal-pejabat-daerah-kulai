@@ -18,7 +18,7 @@ function Navbar({ user, setUser }) {
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
           <span className="text-2xl">🏛️</span>
-          <span className="text-xl font-bold text-gray-900">Official Portal</span>
+          <span className="text-xl font-bold text-gray-900">Portal Rasmi</span>
         </Link>
 
         {/* Desktop Navigation */}
